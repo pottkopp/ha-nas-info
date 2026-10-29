@@ -4,6 +4,9 @@ from homeassistant.util.hass_dict import HassKey
 
 DOMAIN = "nas_info"
 
+# Core legt pro Supervisor-Mount bereits ein Geraet an; wir haengen uns dran.
+HASSIO_DOMAIN = "hassio"
+
 KEY_CLIENT: HassKey = HassKey("nas_info_client")
 
 MIN_UPDATE_INTERVAL = 30
