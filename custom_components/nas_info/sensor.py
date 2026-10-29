@@ -5,7 +5,6 @@ from typing import Any
 from homeassistant.components.sensor import (
     SensorDeviceClass,
     SensorEntity,
-    SensorEntityPlatform,
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import EntityCategory, PERCENTAGE
@@ -105,7 +104,7 @@ async def async_setup_entry(
 
     async_add_entities(build())
 
-    def _new_shares(_coordinator: MountsCoordinator) -> None:
+    def _new_shares() -> None:
         """Neu hinzugekommene Mounts bekommen ebenfalls Sensoren."""
         async_add_entities(build())
 
@@ -115,7 +114,6 @@ async def async_setup_entry(
 class NasInfoSensor(NasInfoEntity, SensorEntity):
     """Sensor eines Netzwerkspeichers."""
 
-    _attr_entity_platform = SensorEntityPlatform.MANUFACTURER
     entity_description: NasInfoEntityDescription
 
     @property
