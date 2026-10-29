@@ -25,7 +25,8 @@
       }
     },
     "error": {
-      "no_mounts": "Der Supervisor meldet keine Netzwerkspeicher (CIFS/NFS)."
+      "no_mounts": "Der Supervisor meldet keine Netzwerkspeicher (CIFS/NFS).",
+      "supervisor_error": "Der Supervisor ist nicht erreichbar."
     },
     "abort": {
       "already_configured": "NAS-Info ist bereits eingerichtet."
