@@ -149,9 +149,7 @@ class NasInfoOptionsFlow(OptionsFlow):
             data_schema=probatio.Schema(
                 {
                     probatio.Required(
-                        CONF_UPDATE_INTERVAL,
-                        default=interval,
-                        description={"suggested_value": interval},
+                        CONF_UPDATE_INTERVAL, default=interval
                     ): selector.NumberSelector(
                         selector.NumberSelectorConfig(
                             min=MIN_UPDATE_INTERVAL,
@@ -162,9 +160,7 @@ class NasInfoOptionsFlow(OptionsFlow):
                         )
                     ),
                     probatio.Required(
-                        CONF_IGNORED_MOUNTS,
-                        default=ignored,
-                        description={"suggested_value": ignored},
+                        CONF_IGNORED_MOUNTS, default=ignored
                     ): selector.SelectSelector(
                         selector.SelectSelectorConfig(
                             options=mount_options,
@@ -173,11 +169,7 @@ class NasInfoOptionsFlow(OptionsFlow):
                             mode=selector.SelectSelectorMode.DROPDOWN,
                         )
                     ),
-                    probatio.Required(
-                        CONF_UNIT_MODE,
-                        default=mode,
-                        description={"suggested_value": mode},
-                    ): selector.SelectSelector(
+                    probatio.Required(CONF_UNIT_MODE, default=mode): selector.SelectSelector(
                         selector.SelectSelectorConfig(
                             options=UNIT_MODE_OPTIONS,
                             mode=selector.SelectSelectorMode.DROPDOWN,
