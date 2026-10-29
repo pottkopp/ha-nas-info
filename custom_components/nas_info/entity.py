@@ -1,4 +1,4 @@
-"""Basis-Entity fuer NAS-Info."""
+"""Basis-Entity für NAS-Info."""
 
 from dataclasses import dataclass
 
@@ -21,7 +21,7 @@ class NasInfoEntityDescription(SensorEntityDescription):
 
 
 class NasInfoEntity(CoordinatorEntity[MountsCoordinator]):
-    """Ein Geraet pro Netzwerkspeicher, namensgleich mit dem Mount."""
+    """Ein Gerät pro Netzwerkspeicher, namensgleich mit dem Mount."""
 
     _attr_has_entity_name = True
 
@@ -39,7 +39,7 @@ class NasInfoEntity(CoordinatorEntity[MountsCoordinator]):
         self._share_name = share.name
         self._attr_unique_id = f"{DOMAIN}_{share.name}_{description.key}"
         # Dieselben Identifikatoren wie die Supervisor-Integration: dadurch liegen
-        # unsere Sensoren auf dem Geraet, das der Mount bereits hat.
+        # unsere Sensoren auf dem Gerät, das der Mount bereits hat.
         self._attr_device_info = DeviceInfo(
             identifiers={(HASSIO_DOMAIN, f"mount_{share.name}")},
             name=share.name,
