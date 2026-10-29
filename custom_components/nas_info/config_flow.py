@@ -1,4 +1,4 @@
-"""Config flow fuer NAS-Info."""
+"""Config flow für NAS-Info."""
 
 import logging
 from typing import Any
@@ -55,14 +55,14 @@ async def async_known_mounts(hass: HomeAssistant) -> list[str] | None:
 
 
 class NasInfoConfigFlow(ConfigFlow, domain=DOMAIN):
-    """Genau einer Eintrag, dazu Rekonfiguration."""
+    """Genau ein Eintrag, dazu Rekonfiguration."""
 
     VERSION = 1
 
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
-        """Einrichtung bestaetigen lassen."""
+        """Einrichtung bestätigen lassen."""
         await self.async_set_unique_id(DOMAIN)
         if self.source != SOURCE_RECONFIGURE:
             self._abort_if_unique_id_configured()
@@ -100,7 +100,7 @@ class NasInfoConfigFlow(ConfigFlow, domain=DOMAIN):
     async def async_step_reconfigure(
         self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
-        """Dialog fuer die Einstellungen eines vorhandenen Eintrags."""
+        """Dialog für die Einstellungen eines vorhandenen Eintrags."""
         return await self.async_step_user(user_input)
 
     @staticmethod
@@ -111,7 +111,7 @@ class NasInfoConfigFlow(ConfigFlow, domain=DOMAIN):
 
 
 class NasInfoOptionsFlow(OptionsFlow):
-    """Intervall, ignorierte Speicher und Einheit nachtraeglich aendern."""
+    """Intervall, ignorierte Speicher und Einheit nachträglich ändern."""
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
