@@ -7,7 +7,7 @@ DOMAIN = "nas_info"
 # Core legt pro Supervisor-Mount bereits ein Geraet an; wir haengen uns dran.
 HASSIO_DOMAIN = "hassio"
 
-KEY_CLIENT: HassKey = HassKey("nas_info_client")
+KEY_API: HassKey = HassKey("nas_info_api")
 
 MIN_UPDATE_INTERVAL = 30
 DEFAULT_UPDATE_INTERVAL = 300
