@@ -1,4 +1,4 @@
-"""Sensoren fuer NAS-Info."""
+"""Sensoren für NAS-Info."""
 
 from typing import Any
 
@@ -63,14 +63,14 @@ DESCRIPTIONS: tuple[NasInfoEntityDescription, ...] = (
     ),
     NasInfoEntityDescription(
         key="read_only",
-        name="Schreibgeschuetzt",
+        name="Schreibgeschützt",
         text_field="read_only",
         entity_category=EntityCategory.DIAGNOSTIC,
         icon="mdi:lock-check-outline",
     ),
     NasInfoEntityDescription(
         key="last_check",
-        name="Zuletzt geprueft",
+        name="Zuletzt geprüft",
         device_class=SensorDeviceClass.TIMESTAMP,
         entity_category=EntityCategory.DIAGNOSTIC,
         icon="mdi:clock-check-outline",
@@ -88,7 +88,7 @@ async def async_setup_entry(
     known: set[str] = set()
 
     def build() -> list[NasInfoEntity]:
-        """Sensoren fuer alle noch nicht angelegten Mounts."""
+        """Sensoren für alle noch nicht angelegten Mounts."""
         entities: list[NasInfoEntity] = []
         if coordinator.data is None:
             return entities
