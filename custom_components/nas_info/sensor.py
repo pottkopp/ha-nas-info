@@ -154,11 +154,3 @@ class NasInfoSensor(NasInfoEntity, SensorEntity):
             getattr(mount, desc.bytes_field), self.coordinator.unit_mode
         )
         return unit
-
-    @property
-    def available(self) -> bool:
-        """Nur aktive Mounts gelten als verfuegbar."""
-        mount = self._mount
-        if mount is None:
-            return False
-        return mount.state is None or mount.state in ("active", "reloading")
