@@ -21,7 +21,6 @@ installieren -> Home Assistant **neu starten**.
 ## Einrichten
 
 Einstellungen -> Geräte & Dienste -> Integration hinzufügen -> **NAS-Info**.
-Es gibt genau einen Eintrag: er überwacht alle gemeldeten Netzwerkspeicher.
 
 ## Geräte
 
