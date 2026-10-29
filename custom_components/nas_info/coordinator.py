@@ -1,4 +1,4 @@
-"""Datenabruf beim Supervisor fuer NAS-Info."""
+"""Datenabruf beim Supervisor für NAS-Info."""
 
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
@@ -41,7 +41,7 @@ STATE_LABELS = {
     "inactive": "inaktiv",
     "failed": "fehlgeschlagen",
     "maintenance": "Wartung",
-    "reloading": "laedt neu",
+    "reloading": "lädt neu",
     "activating": "aktiviert",
     "deactivating": "deaktiviert",
 }
@@ -55,9 +55,9 @@ class SupervisorApi:
     """Schlanker REST-Zugang zum Supervisor.
 
     Die mit Home Assistant ausgelieferte Bibliothek aiohasupervisor bildet den
-    Endpoint fuer die Belegung eines Mounts nicht ab (`host/disks/{name}/usage`),
+    Endpoint für die Belegung eines Mounts nicht ab (`host/disks/{name}/usage`),
     deshalb der direkte Aufruf mit dem Supervisor-Token. Das funktioniert ausserdem
-    unabhaengig davon, welche aiohasupervisor-Version die jeweilige Core-Fassung
+    unabhängig davon, welche aiohasupervisor-Version die jeweilige Core-Fassung
     mitbringt.
     """
 
@@ -67,7 +67,7 @@ class SupervisorApi:
         self._headers = {"Authorization": f"Bearer {token}"}
 
     async def _get(self, path: str, timeout: ClientTimeout) -> dict[str, Any]:
-        """GET gegen den Supervisor, Antwortdaten zurueckgeben."""
+        """GET gegen den Supervisor, Antwortdaten zurückgeben."""
         try:
             async with self._session.get(
                 API_BASE.join(URL(path)), headers=self._headers, timeout=timeout
@@ -90,7 +90,7 @@ class SupervisorApi:
         return data if isinstance(data, dict) else {}
 
     async def mounts(self) -> list[dict[str, Any]]:
-        """Alle beim Supervisor gemeldeten Haengepunkte."""
+        """Alle beim Supervisor gemeldeten Hängepunkte."""
         raw = await self._get("mounts", MOUNTS_TIMEOUT)
         entries = raw.get("mounts")
         if not isinstance(entries, list):
@@ -98,12 +98,12 @@ class SupervisorApi:
         return [entry for entry in entries if isinstance(entry, dict)]
 
     async def mount_usage(self, name: str) -> dict[str, Any]:
-        """Kapazitaet eines Mounts: total_bytes und used_bytes."""
+        """Kapazität eines Mounts: total_bytes und used_bytes."""
         return await self._get(f"host/disks/{quote(name, safe='')}/usage", USAGE_TIMEOUT)
 
 
 def format_bytes(value: int | None, mode: str) -> tuple[str, str]:
-    """Wert + Einheit; faellt der Wert unter 0,5, eine Einheit kleiner."""
+    """Wert + Einheit; fällt der Wert unter 0,5, eine Einheit kleiner."""
     if value is None or value < 0:
         return "unavailable", ""
     if mode == "bytes":
@@ -125,7 +125,7 @@ def format_bytes(value: int | None, mode: str) -> tuple[str, str]:
 
 @dataclass(frozen=True, slots=True)
 class NetShare:
-    """Ein Netzwerkspeicher mit seinen Kapazitaetszahlen."""
+    """Ein Netzwerkspeicher mit seinen Kapazitätszahlen."""
 
     name: str
     type: str
@@ -187,7 +187,7 @@ class MountsCoordinator(DataUpdateCoordinator[MountsData]):
         return self._mode
 
     def apply_options(self, ignored: list[str], mode: str, interval: int) -> None:
-        """Optionen uebernehmen, Intervall sofort setzen."""
+        """Optionen übernehmen, Intervall sofort setzen."""
         self._ignored = ignored
         self._mode = mode
         self.update_interval = timedelta(seconds=interval)
@@ -227,12 +227,12 @@ class MountsCoordinator(DataUpdateCoordinator[MountsData]):
         try:
             data = await self._api.mount_usage(name)
         except SupervisorApiError as err:
-            _LOGGER.warning("Keine Kapazitaetsdaten fuer Mount %r: %s", name, err)
+            _LOGGER.warning("Keine Kapazitätsdaten für Mount %r: %s", name, err)
             return None, None
         total, used = data.get("total_bytes"), data.get("used_bytes")
         if not isinstance(total, int) or not isinstance(used, int):
             _LOGGER.warning(
-                "Ueberraschende Antwort fuer Mount %r: %s", name, sorted(data)
+                "Unerwartete Antwort für Mount %r: %s", name, sorted(data)
             )
             return None, None
         return total, used
@@ -244,7 +244,7 @@ async def async_get_api(hass: HomeAssistant) -> SupervisorApi:
         return api
     if not (token := os.environ.get("SUPERVISOR_TOKEN")):
         raise ConfigEntryError(
-            "NAS-Info laeuft nur auf Home Assistant OS oder HA Supervised: kein "
+            "NAS-Info läuft nur auf Home Assistant OS oder HA Supervised: kein "
             "Zugang zum Supervisor."
         )
     api = SupervisorApi(async_get_clientsession(hass), token)
@@ -261,6 +261,6 @@ def read_options(entry: ConfigEntry) -> tuple[list[str], str, int]:
         mode = DEFAULT_UNIT_MODE
     try:
         interval = int(options.get(CONF_UPDATE_INTERVAL) or DEFAULT_UPDATE_INTERVAL)
-    except (TypeError, ValueError):
+    except (TypeError, ValüError):
         interval = DEFAULT_UPDATE_INTERVAL
     return ignored, mode, max(interval, MIN_UPDATE_INTERVAL)
