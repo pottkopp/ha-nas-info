@@ -1,10 +1,10 @@
-"""Constants fuer NAS-Info."""
+"""Constants für NAS-Info."""
 
 from homeassistant.util.hass_dict import HassKey
 
 DOMAIN = "nas_info"
 
-# Core legt pro Supervisor-Mount bereits ein Geraet an; wir haengen uns dran.
+# Core legt pro Supervisor-Mount bereits ein Gerät an; wir hängen uns dran.
 HASSIO_DOMAIN = "hassio"
 
 KEY_API: HassKey = HassKey("nas_info_api")
