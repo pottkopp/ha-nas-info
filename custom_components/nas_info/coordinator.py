@@ -11,6 +11,7 @@ from aiohasupervisor import SupervisorClient, SupervisorError
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryError
+from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import (
@@ -186,7 +187,7 @@ async def async_get_client(hass: HomeAssistant) -> SupervisorClient:
             "NAS-Info laeuft nur auf Home Assistant OS oder HA Supervised: kein "
             "Zugang zum Supervisor."
         )
-    client = SupervisorClient(api_host="http://supervisor", token=token)
+    client = SupervisorClient("http://supervisor", token, session=async_get_clientsession(hass))
     hass.data[KEY_CLIENT] = client
     return client
 
