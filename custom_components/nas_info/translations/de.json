@@ -18,9 +18,9 @@
           "unit_mode": "Anzeige der Speichermengen"
         },
         "data_description": {
-          "update_interval": "Wie oft der Stand beim Supervisor abgefragt wird. Standard 300.",
+          "update_interval": "Wie oft der Stand beim Supervisor abgefragt wird. Standard alle 5 Minuten (300s).",
           "ignored_mounts": "Leer lassen, um alle Netzwerkspeicher zu ueberwachen.",
-          "unit_mode": "Automatisch wechselt die Einheit, sobald der Wert unter 0,5 faellt."
+          "unit_mode": "Automatisch wechselt die Einheit, sobald der Wert unter 0,5 fällt."
         }
       }
     },
