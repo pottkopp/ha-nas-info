@@ -1,6 +1,6 @@
 """Constants fuer NAS-Info."""
 
-from homeassistant.core import HassKey
+from homeassistant.util.hass_dict import HassKey
 
 DOMAIN = "nas_info"
 
