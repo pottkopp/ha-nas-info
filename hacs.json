@@ -1,0 +1,5 @@
+{
+  "name": "NAS-Info",
+  "render_readme": true,
+  "content_path": "custom_components/nas_info"
+}
