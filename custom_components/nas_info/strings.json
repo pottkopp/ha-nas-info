@@ -18,9 +18,9 @@
           "unit_mode": "Storage unit display"
         },
         "data_description": {
-          "update_interval": "How often the Supervisor is asked. Default 300.",
+          "update_interval": "How often the Supervisor is asked. Default is every 5 minutes (300s).",
           "ignored_mounts": "Leave empty to monitor every network share.",
-          "unit_mode": "Automatic switches the unit when a value drops below 0.5."
+          "unit_mode": "Automatically switches the unit when a value drops below 0.5."
         }
       }
     },
