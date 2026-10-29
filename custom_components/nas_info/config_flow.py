@@ -5,7 +5,6 @@ from typing import Any
 
 import probatio
 
-from aiohasupervisor import SupervisorClient, SupervisorError
 from homeassistant.config_entries import (
     SOURCE_RECONFIGURE,
     ConfigEntry,
@@ -23,10 +22,14 @@ from .const import (
     DEFAULT_UNIT_MODE,
     DEFAULT_UPDATE_INTERVAL,
     DOMAIN,
-    KEY_CLIENT,
     MIN_UPDATE_INTERVAL,
 )
-from .coordinator import NET_TYPES, async_get_client, read_options
+from .coordinator import (
+    NET_TYPES,
+    SupervisorApiError,
+    async_get_api,
+    read_options,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -39,18 +42,15 @@ UNIT_MODE_OPTIONS = [
 
 async def async_known_mounts(hass: HomeAssistant) -> list[str] | None:
     """Netzwerkspeicher; None, wenn der Supervisor nicht erreichbar ist."""
-    client: SupervisorClient | None = hass.data.get(KEY_CLIENT)
-    if client is None:
-        client = await async_get_client(hass)
     try:
-        info = await client.mounts.info()
-    except SupervisorError as err:
+        entries = await (await async_get_api(hass)).mounts()
+    except SupervisorApiError as err:
         _LOGGER.warning("Mounts nicht abrufbar: %s", err)
         return None
     return [
-        str(mount.name)
-        for mount in info.mounts
-        if str(mount.type) in NET_TYPES
+        str(entry["name"])
+        for entry in entries
+        if entry.get("name") and str(entry.get("type")) in NET_TYPES
     ]
 
 
