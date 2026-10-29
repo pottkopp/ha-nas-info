@@ -7,7 +7,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN
+from .const import DOMAIN, HASSIO_DOMAIN
 from .coordinator import MountsCoordinator, NetShare
 
 
@@ -21,7 +21,7 @@ class NasInfoEntityDescription(SensorEntityDescription):
 
 
 class NasInfoEntity(CoordinatorEntity[MountsCoordinator]):
-    """Ein Mount = ein Geraet mit dem Namen des Netzwerkspeichers."""
+    """Ein Geraet pro Netzwerkspeicher, namensgleich mit dem Mount."""
 
     _attr_has_entity_name = True
 
@@ -38,13 +38,11 @@ class NasInfoEntity(CoordinatorEntity[MountsCoordinator]):
         self._config_entry = config_entry
         self._share_name = share.name
         self._attr_unique_id = f"{DOMAIN}_{share.name}_{description.key}"
+        # Dieselben Identifikatoren wie die Supervisor-Integration: dadurch liegen
+        # unsere Sensoren auf dem Geraet, das der Mount bereits hat.
         self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, f"mount_{share.name}")},
+            identifiers={(HASSIO_DOMAIN, f"mount_{share.name}")},
             name=share.name,
-            manufacturer=share.server or "Unbekannt",
-            model="CIFS/SMB" if share.type == "cifs" else "NFS",
-            sw_version=share.usage,
-            configuration_url="http://supervisor/stores/storage",
         )
 
     @property
