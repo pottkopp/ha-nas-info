@@ -3,8 +3,10 @@
 Meldet die Belegung aller beim **Supervisor** eingebundenen **Netzwerkspeicher**
 (CIFS/SMB und NFS) als Sensoren.
 
-Kein MQTT, kein Add-on, keine externen Pakete: die Integration fragt den
-Supervisor direkt ab (`aiohasupervisor`, das Home Assistant mitbringt).
+Kein MQTT, kein Add-on, keine externen Pakete: die Integration spricht die
+Supervisor-Schnittstelle direkt an (HTTP mit dem Supervisor-Token). Die
+mitgelieferte Bibliothek `aiohasupervisor` bildet den Endpunkt fuer die
+Mount-Belegung naemlich nicht ab.
 
 ## Voraussetzungen
 
@@ -61,8 +63,9 @@ oder `Immer GB` waehlen.
 - **„Der Supervisor meldet keine Netzwerkspeicher"**: es existiert kein CIFS/NFS-Mount.
 - **„Der Supervisor ist nicht erreichbar"**: Supervisor-Antwort fehlgeschlagen, Details
   im Core-Log.
-- **Gesamt/Belegt/Frei ohne Wert**: `host/disks/<name>/usage` liefert nichts; im
-  Core-Log steht eine Warnung mit dem Mount-Namen.
+- **Gesamt/Belegt/Frei ohne Wert**: `host/disks/<name>/usage` liefert nichts (z. B.
+  Server offline); im Core-Log steht eine Warnung mit dem Mount-Namen. Die
+  Messung des Supervisors wartet im Zweifel bis zu 60 s auf den Dateisystem-Probe.
 - **Integration nicht in der Liste**: Core neu starten, nicht nur HACS aktualisieren.
 
 ## deinstallieren
