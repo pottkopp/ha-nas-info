@@ -25,7 +25,8 @@
       }
     },
     "error": {
-      "no_mounts": "The Supervisor reports no network shares (CIFS/NFS)."
+      "no_mounts": "The Supervisor reports no network shares (CIFS/NFS).",
+      "supervisor_error": "The Supervisor is not reachable."
     },
     "abort": {
       "already_configured": "NAS-Info is already set up."
