@@ -59,6 +59,8 @@ oder `Immer GB` waehlen.
 ## Fehlerbilder
 
 - **„Der Supervisor meldet keine Netzwerkspeicher"**: es existiert kein CIFS/NFS-Mount.
+- **„Der Supervisor ist nicht erreichbar"**: Supervisor-Antwort fehlgeschlagen, Details
+  im Core-Log.
 - **Gesamt/Belegt/Frei ohne Wert**: `host/disks/<name>/usage` liefert nichts; im
   Core-Log steht eine Warnung mit dem Mount-Namen.
 - **Integration nicht in der Liste**: Core neu starten, nicht nur HACS aktualisieren.
