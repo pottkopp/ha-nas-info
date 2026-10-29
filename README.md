@@ -5,8 +5,8 @@ Meldet die Belegung aller beim **Supervisor** eingebundenen **Netzwerkspeicher**
 
 Kein MQTT, kein Add-on, keine externen Pakete: die Integration spricht die
 Supervisor-Schnittstelle direkt an (HTTP mit dem Supervisor-Token). Die
-mitgelieferte Bibliothek `aiohasupervisor` bildet den Endpunkt fuer die
-Mount-Belegung naemlich nicht ab.
+mitgelieferte Bibliothek `aiohasupervisor` bildet den Endpunkt für die
+Mount-Belegung nämlich nicht ab.
 
 ## Voraussetzungen
 
@@ -26,18 +26,18 @@ installieren -> Home Assistant **neu starten**.
 ## Einrichten
 
 Einstellungen -> Gerate & Dienste -> Integration hinzufügen -> **NAS-Info**.
-Es gibt genau einen Eintrag: er ueberwacht alle gemeldeten Netzwerkspeicher.
+Es gibt genau einen Eintrag: er überwacht alle gemeldeten Netzwerkspeicher.
 
-## Geraete
+## Geräte
 
-Der Supervisor legt pro Netzwerkspeicher bereits ein Geraet an (Name =
-Mount-Name, mit einem Mount-Binaerschalter). NAS-Info haengt seine Sensoren an
-**genau dieses Geraet** an — es entsteht kein zweites Geraet mit demselben Namen.
+Der Supervisor legt pro Netzwerkspeicher bereits ein Gerät an (Name =
+Mount-Name, mit einem Mount-Binärschalter). NAS-Info hängt seine Sensoren an
+**genau dieses Gerät** an — es entsteht kein zweites Gerät mit demselben Namen.
 
 ## Sensoren pro Speicher
 
 Gesamt, Belegt, Frei, Auslastung (%), Status, Server, Freigabe,
-Schreibgeschuetzt, Zuletzt geprueft. Beispiel-Entitaet:
+Schreibgeschützt, Zuletzt geprüft. Beispiel-Entität:
 `sensor.speicherpott_belegt`.
 
 ## Optionen (Integration -> NAS-Info -> Optionen)
@@ -48,15 +48,15 @@ Schreibgeschuetzt, Zuletzt geprueft. Beispiel-Entitaet:
 | Diese Speicher ignorieren | leer | Namen ohne Sensoren |
 | Anzeige der Speichermengen | Automatisch | `auto`, `Immer GB`, `Rohwerte in Bytes` |
 
-Aenderungen wirken ohne Neustart.
+Änderungen wirken ohne Neustart.
 
 ### Die 0,5-Regel
 
 Bei `Automatisch` wechselt die Einheit nach unten, wenn der Wert unter 0,5 einer
-Einheit faellt: 400 MB zeigt `400 MB` (nicht `0,4 GB`), 513 MB zeigt `0,5 GB`.
-Der Zustand ist dabei Text mit zugehoeriger Einheit und kann nicht in
-Langzeitstatistik (Mittelwert/Summe) benutzt werden — dafuer `Rohwerte in Bytes`
-oder `Immer GB` waehlen.
+Einheit fällt: 400 MB zeigt `400 MB` (nicht `0,4 GB`), 513 MB zeigt `0,5 GB`.
+Der Zustand ist dabei Text mit zugehöriger Einheit und kann nicht in
+Langzeitstatistik (Mittelwert/Summe) benutzt werden — dafür `Rohwerte in Bytes`
+oder `Immer GB` wählen.
 
 ## Fehlerbilder
 
@@ -70,5 +70,5 @@ oder `Immer GB` waehlen.
 
 ## deinstallieren
 
-Eintrag entfernen — die NAS-Info-Entitaeten verschwinden, das Mount-Geraet des
+Eintrag entfernen — die NAS-Info-Entitäten verschwinden, das Mount-Gerät des
 Supervisors bleibt erhalten.
