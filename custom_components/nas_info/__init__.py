@@ -36,7 +36,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 
 async def _async_update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
-    """Optionen ohne Neustart uebernehmen."""
+    """Optionen ohne Neustart übernehmen."""
     if entry.state is not ConfigEntryState.LOADED or (
         coordinator := hass.data.get(entry.entry_id)
     ) is None:
@@ -49,7 +49,7 @@ async def _async_update_listener(hass: HomeAssistant, entry: ConfigEntry) -> Non
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Sensoren abmelden, Geraete bleiben bis zum Entfernen des Eintrags."""
+    """Sensoren abmelden, Geräte bleiben bis zum Entfernen des Eintrags."""
     if not await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
         return False
     if (coordinator := hass.data.pop(entry.entry_id, None)) is not None:
