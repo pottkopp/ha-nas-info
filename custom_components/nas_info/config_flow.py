@@ -37,8 +37,8 @@ UNIT_MODE_OPTIONS = [
 ]
 
 
-async def async_known_mounts(hass: HomeAssistant) -> list[str]:
-    """Netzwerkspeicher, die der Supervisor meldet."""
+async def async_known_mounts(hass: HomeAssistant) -> list[str] | None:
+    """Netzwerkspeicher; None, wenn der Supervisor nicht erreichbar ist."""
     client: SupervisorClient | None = hass.data.get(KEY_CLIENT)
     if client is None:
         client = await async_get_client(hass)
@@ -46,7 +46,7 @@ async def async_known_mounts(hass: HomeAssistant) -> list[str]:
         info = await client.mounts.info()
     except SupervisorError as err:
         _LOGGER.warning("Mounts nicht abrufbar: %s", err)
-        return []
+        return None
     return [
         str(mount.name)
         for mount in info.mounts
@@ -69,6 +69,10 @@ class NasInfoConfigFlow(ConfigFlow, domain=DOMAIN):
 
         if user_input is None:
             names = await async_known_mounts(self.hass)
+            if names is None:
+                return self.async_show_form(
+                    step_id="user", errors={"base": "supervisor_error"}
+                )
             if not names:
                 return self.async_show_form(
                     step_id="user", errors={"base": "no_mounts"}
@@ -139,6 +143,8 @@ class NasInfoOptionsFlow(OptionsFlow):
 
         ignored, mode, interval = read_options(entry)
         names = await async_known_mounts(self.hass)
+        if names is None:
+            names = []
         names += [name for name in ignored if name not in names]
         mount_options = [
             selector.SelectOptionDict(value=name, label=name) for name in names
