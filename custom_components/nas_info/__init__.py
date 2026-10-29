@@ -8,7 +8,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryError
 
 from .const import DOMAIN
-from .coordinator import MountsCoordinator, async_get_client, read_options
+from .coordinator import MountsCoordinator, async_get_api, read_options
 
 PLATFORMS: list[Platform] = [Platform.SENSOR]
 _LOGGER = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Coordinator starten und Sensoren anlegen."""
     try:
-        client = await async_get_client(hass)
+        client = await async_get_api(hass)
     except ConfigEntryError as err:
         raise ConfigEntryError(
             "NAS-Info braucht Home Assistant OS oder HA Supervised: kein Zugang "
