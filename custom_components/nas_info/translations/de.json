@@ -1,0 +1,34 @@
+{
+  "config": {
+    "title": "Netzwerkspeicher (NAS-Info)",
+    "step": {
+      "user": {
+        "title": "NAS-Info einrichten",
+        "description": "Erkannte Netzwerkspeicher: {mounts}"
+      },
+      "reconfigure": {
+        "title": "NAS-Info rekonfigurieren",
+        "description": "Erkannte Netzwerkspeicher: {mounts}"
+      },
+      "init": {
+        "title": "NAS-Info Optionen",
+        "data": {
+          "update_interval": "Aktualisierungsintervall (Sekunden)",
+          "ignored_mounts": "Diese Speicher ignorieren",
+          "unit_mode": "Anzeige der Speichermengen"
+        },
+        "data_description": {
+          "update_interval": "Wie oft der Stand beim Supervisor abgefragt wird. Standard 300.",
+          "ignored_mounts": "Leer lassen, um alle Netzwerkspeicher zu ueberwachen.",
+          "unit_mode": "Automatisch wechselt die Einheit, sobald der Wert unter 0,5 faellt."
+        }
+      }
+    },
+    "error": {
+      "no_mounts": "Der Supervisor meldet keine Netzwerkspeicher (CIFS/NFS)."
+    },
+    "abort": {
+      "already_configured": "NAS-Info ist bereits eingerichtet."
+    }
+  }
+}

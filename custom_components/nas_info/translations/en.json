@@ -1,0 +1,34 @@
+{
+  "config": {
+    "title": "Network shares (NAS-Info)",
+    "step": {
+      "user": {
+        "title": "Set up NAS-Info",
+        "description": "Detected network storage: {mounts}"
+      },
+      "reconfigure": {
+        "title": "Reconfigure NAS-Info",
+        "description": "Detected network storage: {mounts}"
+      },
+      "init": {
+        "title": "NAS-Info options",
+        "data": {
+          "update_interval": "Update interval (seconds)",
+          "ignored_mounts": "Ignore these shares",
+          "unit_mode": "Storage unit display"
+        },
+        "data_description": {
+          "update_interval": "How often the Supervisor is asked. Default 300.",
+          "ignored_mounts": "Leave empty to monitor every network share.",
+          "unit_mode": "Automatic switches the unit when a value drops below 0.5."
+        }
+      }
+    },
+    "error": {
+      "no_mounts": "The Supervisor reports no network shares (CIFS/NFS)."
+    },
+    "abort": {
+      "already_configured": "NAS-Info is already set up."
+    }
+  }
+}
